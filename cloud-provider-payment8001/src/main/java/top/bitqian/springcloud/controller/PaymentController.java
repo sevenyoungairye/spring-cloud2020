@@ -1,10 +1,7 @@
 package top.bitqian.springcloud.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import top.bitqian.springcloud.entity.CommonResult;
 import top.bitqian.springcloud.entity.Payment;
 import top.bitqian.springcloud.service.PaymentService;
@@ -24,8 +21,12 @@ public class PaymentController {
     @Resource
     private PaymentService paymentService;
 
+    // @RequestBody 接收请求体中的数据~
     @PostMapping("/payment/create")
-    public CommonResult createPayment(Payment payment) {
+    public CommonResult createPayment(@RequestBody Payment payment) {
+
+        System.out.println("===========>" + payment);
+
         int res = paymentService.createPayment(payment);
         log.info("==========================>完成新增");
         if (res > 0) {
