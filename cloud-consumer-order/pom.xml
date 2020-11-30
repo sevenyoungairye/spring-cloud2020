@@ -49,6 +49,12 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- 公共的包抽取，api -->
+        <dependency>
+            <groupId>top.bitqian</groupId>
+            <artifactId>cloud-api-commons</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 
     </dependencies>
 
