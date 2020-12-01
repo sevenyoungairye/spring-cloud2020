@@ -22,7 +22,6 @@ public class PaymentController {
     @Resource
     private PaymentService paymentService;
 
-    //  当前支付模块服务端口
     @Value("${server.port}")
     private String port;
 
@@ -36,7 +35,7 @@ public class PaymentController {
         log.info("==========================>完成新增");
         if (res > 0) {
             log.info("================================> 新增成功");
-            return new CommonResult<>(200, "create success, serverPort" + port, res);
+            return new CommonResult<>(200, "create success, serverPort:" + port, res);
         } else {
 
             return new CommonResult<>(400, "create failure ~", res);

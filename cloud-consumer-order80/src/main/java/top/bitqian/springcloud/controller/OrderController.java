@@ -22,7 +22,15 @@ import javax.annotation.Resource;
 @Slf4j
 public class OrderController {
 
-    private static final String PAYMENT_URL = "http://localhost:8001";
+    // 单机版 一个支付服务提供者服务地址写死了
+    // private static final String PAYMENT_URL = "http://localhost:8001";
+
+    // 根据服务名通过一定的负载均衡算法找到具体的服务端口, 多个支付服务提供者
+    private static final String PAYMENT_URL = "http://CLOUD-PAYMENT-SERVICE";
+
+    // 坑，多个服务提供者，不知道你具体的服务端口是哪个..
+    // I/O error on GET request for "http://CLOUD-PAYMENT-SERVICE/payment/get/1":CLOUD-PAYMENT-SERVICE;
+    // nested exception is java.net.UnknownHostException: CLOUD-PAYMENT-SERVICE
 
     @Resource
     private RestTemplate restTemplate;
