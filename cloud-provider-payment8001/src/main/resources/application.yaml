@@ -18,3 +18,12 @@ mybatis:
   type-aliases-package: top.bitqian.springcloud.entity
   mapper-locations: classpath:mapper/*.xml
 
+# eureka客户端 可以又多个
+eureka:
+  client:
+    register-with-eureka: true
+    fetchRegistry: true
+    service-url:
+      defaultZone: http://localhost:7001/eureka # 服务注册中心地址
+
+
