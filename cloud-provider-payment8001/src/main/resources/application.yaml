@@ -25,13 +25,30 @@ eureka:
     fetchRegistry: true
     service-url:
       # 将支付服务8001发布到7001, 7002 两台eureka集群配置中
-      defaultZone: http://eureka7001.com:7001/eureka,http://eureka7002.com:7002/eureka  #集群版
+      # defaultZone: http://eureka7001.com:7001/eureka,http://eureka7002.com:7002/eureka  #集群版
       # defaultZone: http://localhost:7001/eureka # 服务注册中心地址
+
+      # 自我保护机制出现现象: 服务客户端和eureka server之间在网络分区下进行的保护
+      # 一旦进入保护模式，eureka server将会尝试保护其注册表中的信息, 不会注销掉任何微服务
+      # 某个时刻某一个微服务不可用了, eureka不会进行服务清理, 会对微服务信息进行保存。
+      # 为什么进行保护: 网络是不稳定的, 可能某个服务可能因为短暂的网络拥堵, 导致服务暂停了, 但是服务是健康的。 cap --> ap
+
+      # 禁止eureka的自我保护机制, 使用单机版配置
+      defaultZone: http://localhost:7001/eureka # single
+      # 缩短心跳包发送
 
   # 对外eureka显示的服务名称是8001
   instance:
     instance-id: payment8001
     # 在具体的服务前配置主机ip显示
     prefer-ip-address: true
+
+    # 测试 禁止eureka的保护。 开发时设置小些，保证服务关闭后，注册中心能及时剔除服务。
+    # 每隔1 s eureka客户端向服务端发送心跳包的间隔时间
+    lease-renewal-interval-in-seconds: 1
+    # 间隔2 s eureka在服务端收到最后一次心跳后的等待时间上限, 上限90s, 超时将剔除服务。
+    lease-expiration-duration-in-seconds: 2
+
+
 
 
