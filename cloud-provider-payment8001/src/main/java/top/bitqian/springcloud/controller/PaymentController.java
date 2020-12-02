@@ -2,12 +2,15 @@ package top.bitqian.springcloud.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.*;
 import top.bitqian.springcloud.entity.CommonResult;
 import top.bitqian.springcloud.entity.Payment;
 import top.bitqian.springcloud.service.PaymentService;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * 支付接口
@@ -21,6 +24,10 @@ public class PaymentController {
 
     @Resource
     private PaymentService paymentService;
+
+    // 对外提供接口, 暴露当前的所有服务名, 和具体的服务实例.
+    @Resource
+    private DiscoveryClient discoveryClient;
 
     //  当前支付模块服务端口
     @Value("${server.port}")
@@ -57,6 +64,28 @@ public class PaymentController {
 
         return new CommonResult<>(444, "nothing..");
 
+    }
+
+    @RequestMapping("/payment/discovery")
+    public Object getDiscovery() {
+
+        // 获取注册到服务中心的所有服务
+        List<String> services = discoveryClient.getServices();
+
+        services.forEach(service-> log.info("service in register------->" +  service));
+
+        // 获取服务支付服务下的 服务实例
+        List<ServiceInstance> paymentInstances = discoveryClient.getInstances("CLOUD-PAYMENT-SERVICE");
+
+        paymentInstances.forEach(paymentService -> {
+            log.info("host----------->" + paymentService.getHost());
+            log.info("port----------->" + paymentService.getPort());
+            log.info("instance id----------->" + paymentService.getInstanceId());
+            log.info("service id----------->" + paymentService.getServiceId());
+            log.info("uri----------->" + paymentService.getUri());
+        });
+
+        return this.discoveryClient;
     }
 
 }
