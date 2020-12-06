@@ -57,6 +57,7 @@
         </dependency>
 
         <!-- eureka client -->
+        <!-- 整合了spring-cloud-starter-netflix-ribbon -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
