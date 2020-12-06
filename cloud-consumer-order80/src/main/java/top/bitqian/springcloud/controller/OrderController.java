@@ -48,7 +48,7 @@ public class OrderController {
     // 调用查询~
     @GetMapping("/consumer/payment/get/{id}")
     public CommonResult getPayment(@PathVariable("id") Long id) {
-        log.info("嘤嘤怪，跑通了吖。消费者80调用8001..");
+        log.info("嘤嘤怪，跑通了吖。消费者80调用payment..");
         return restTemplate.getForObject(PAYMENT_URL + "/payment/get/" + id, CommonResult.class);
     }
 
