@@ -58,4 +58,11 @@ public class PaymentController {
 
     }
 
+    // 手写 轮询测试~
+    @GetMapping("/payment/lb")
+    public String getByLb() {
+
+        return "" + port;
+    }
+
 }

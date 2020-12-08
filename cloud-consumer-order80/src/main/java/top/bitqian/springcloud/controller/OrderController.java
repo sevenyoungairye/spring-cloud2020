@@ -1,6 +1,8 @@
 package top.bitqian.springcloud.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -8,8 +10,11 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import top.bitqian.springcloud.entity.CommonResult;
 import top.bitqian.springcloud.entity.Payment;
+import top.bitqian.springcloud.lb.impl.MyLoadBalance;
 
 import javax.annotation.Resource;
+import java.net.URI;
+import java.util.List;
 
 
 /**
@@ -35,6 +40,14 @@ public class OrderController {
 
     @Resource
     private RestTemplate restTemplate;
+
+    // client
+    @Resource
+    private DiscoveryClient discoveryClient;
+
+    // 自定义轮询
+    @Resource
+    private MyLoadBalance myLb;
 
     // 调用
     @GetMapping("/consumer/payment/create")
@@ -90,6 +103,22 @@ public class OrderController {
         }
 
         return new CommonResult(444, "error");
+    }
+
+    // 测试手写的轮询算法~
+    @GetMapping("/consumer/payment/lb")
+    public String getPaymentByLb() {
+
+        // 根据服务名获取服务列表
+        List<ServiceInstance> serviceInstanceList =
+                discoveryClient.getInstances("CLOUD-PAYMENT-SERVICE");
+
+        // 1 2, 1 2, 1 2, 获取服务~
+        ServiceInstance instance = myLb.getInstance(serviceInstanceList);
+
+        URI uri = instance.getUri();
+
+        return restTemplate.getForObject(uri + "/payment/lb", String.class);
     }
 
 }

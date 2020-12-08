@@ -1,6 +1,6 @@
 package top.bitqian.springcloud.config;
 
-import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+// import org.springframework.cloud.client.loadbalancer.LoadBalanced; // 测试自定义轮询
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
@@ -17,7 +17,7 @@ import org.springframework.web.client.RestTemplate;
 public class ApplicationContextConfig {
 
     // 赋予restTemplate 负载均衡的能力, 默认轮询算法
-    @LoadBalanced
+    // @LoadBalanced // 测试自定义轮询算法，注释掉了
     // 将这个RestTemplate丢入容器.
     @Bean
     public RestTemplate getRestTemplate() {
