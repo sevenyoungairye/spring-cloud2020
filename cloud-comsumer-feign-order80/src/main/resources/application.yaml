@@ -15,3 +15,10 @@ ribbon:
   ReadTimeout: 5000
   # 指的是建立连接后从服务器读取到可用资源的时间
   ConnectTimeout: 5000
+
+# feign 调用远程服务日志记录
+logging:
+  # 需要开启日志的客户端
+  level:
+    top.bitqian.springcloud.service.PaymentFeignService: debug
+
