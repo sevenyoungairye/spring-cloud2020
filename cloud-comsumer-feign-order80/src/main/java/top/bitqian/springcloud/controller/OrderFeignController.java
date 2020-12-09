@@ -27,4 +27,11 @@ public class OrderFeignController {
         return paymentFeignService.getPaymentById(id);
     }
 
+    // feign 的默认超时时间为1s
+    @GetMapping("/consumer/payment/feign/timeout")
+    public String paymentFeignTimeout() {
+        // java.net.SocketTimeoutException: Read timed out 如果不设置超时控制就会报错
+        return paymentFeignService.paymentFeignTimeout();
+    }
+
 }

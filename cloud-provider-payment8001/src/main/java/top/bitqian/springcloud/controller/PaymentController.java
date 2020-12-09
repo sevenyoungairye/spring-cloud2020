@@ -11,6 +11,7 @@ import top.bitqian.springcloud.service.PaymentService;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 支付接口
@@ -93,6 +94,20 @@ public class PaymentController {
     public String getByLb() {
 
         return "" + port;
+    }
+
+    // 测试feign的超时控制~
+    @GetMapping("/payment/feign/timeout")
+    public String paymentFeignTimeout() {
+
+        try {
+            // moni某个业务进行，需要3秒
+            TimeUnit.SECONDS.sleep(3);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return this.port;
     }
 
 }
