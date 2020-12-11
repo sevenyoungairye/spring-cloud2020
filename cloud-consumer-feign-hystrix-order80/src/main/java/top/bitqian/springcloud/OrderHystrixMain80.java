@@ -2,6 +2,7 @@ package top.bitqian.springcloud;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
 /**
@@ -10,6 +11,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  * @date 2020/12/10 22:26
  */
 
+@EnableHystrix // 开启hystrix
 @EnableFeignClients
 @SpringBootApplication
 public class OrderHystrixMain80 {

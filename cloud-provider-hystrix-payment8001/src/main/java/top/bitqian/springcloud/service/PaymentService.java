@@ -27,9 +27,9 @@ public class PaymentService {
     })
     public String payment_timeout(Integer id) {
 
-        System.out.println(1/0);
+        // System.out.println(1/0);
 
-        Integer timeout =  5; // 5s
+        Integer timeout =  2; // 5s
 
         try {
             TimeUnit.SECONDS.sleep(timeout);
@@ -38,7 +38,7 @@ public class PaymentService {
         }
 
         return "线程池: " + Thread.currentThread().getName() +
-                "timeout 呜呜呜~" + "id: " + id + "超时(s) " + timeout;
+                " timeout 呜~ 成功了 " + "id: " + id + "超时(s) " + timeout;
     }
 
     /**

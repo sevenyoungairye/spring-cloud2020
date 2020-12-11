@@ -11,3 +11,8 @@ eureka:
 spring:
   application:
     name: cloud-provider-hystrix-order
+
+# openFeign开启hystrix 如果处理80的容错就开启
+feign:
+  hystrix:
+    enabled: true
