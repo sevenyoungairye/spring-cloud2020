@@ -4,6 +4,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import top.bitqian.springcloud.service.impl.PaymentFallbackService;
 
 /**
  * feign 接口~
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
  */
 
 @Component
-@FeignClient(value = "CLOUD-PROVIDER-HYSTRIX-PAYMENT")
+@FeignClient(value = "CLOUD-PROVIDER-HYSTRIX-PAYMENT", fallback = PaymentFallbackService.class) // 设置服务降级的处理类
 public interface PaymentHystrixService {
 
 
