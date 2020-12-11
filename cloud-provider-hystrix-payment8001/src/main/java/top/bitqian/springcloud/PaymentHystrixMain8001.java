@@ -2,6 +2,7 @@ package top.bitqian.springcloud;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
 /**
@@ -10,6 +11,7 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
  * @date 2020/12/10 20:17
  */
 
+@EnableCircuitBreaker // 开启服务降级
 @EnableEurekaClient // discovery by eureka
 @SpringBootApplication
 public class PaymentHystrixMain8001 {
