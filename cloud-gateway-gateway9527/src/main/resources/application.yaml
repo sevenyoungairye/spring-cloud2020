@@ -1,0 +1,35 @@
+# gateway --> 路由 断言 过滤器
+server:
+  port: 9527
+
+# 网关配置
+spring:
+  application:
+    name: cloud-gateway
+
+  cloud:
+    gateway:
+      routes:
+        - id: payment_routh1 # 路由的id 没有固定规则但是要求唯一 配合服务名称
+          uri: http://localhost:8001 # 匹配后提供服务的路由地址
+          predicates:
+          - Path=/payment/get/** # 路径像匹配的进行断言~
+
+        - id: payment_routh2 # 路由的id 没有固定规则但是要求唯一 配合服务名称
+          uri: http://localhost:8001 # 匹配后提供服务的路由地址
+          predicates:
+          - Path=/payment/lb/** # 路径像匹配的进行断言~
+
+# gateway 入驻eureka~
+eureka:
+  instance:
+    hostname: cloud-gateway-service
+  client:
+    service-url:
+      register-with-eureka: true
+      fetch-registry: true
+      defaultZone: http://eureka7001.com:7001/eureka
+
+
+
+
