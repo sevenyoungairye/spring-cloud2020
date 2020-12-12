@@ -1,2 +1,6 @@
+# 监控界面 http://localhost:9001/hystrix
 server:
   port: 9001
+
+# 需要监控的链接 http://localhost:8001/hystrix.stream
+# 可以看到断路器CircuitBreaker的开关状态, closed is right, open is bad...
