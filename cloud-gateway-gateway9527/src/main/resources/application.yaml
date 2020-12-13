@@ -26,6 +26,14 @@ spring:
           uri: lb://cloud-payment-service
           predicates:
           - Path=/payment/lb/** # 路径像匹配的进行断言~
+            # 新增断言配置
+            # https://cloud.spring.io/spring-cloud-static/spring-cloud-gateway/2.2.1.RELEASE/reference/html/#gateway-request-predicates-factories
+          - After=2020-12-13T11:37:03.340+08:00[Asia/Shanghai] # 必须在这个时间之后
+          # - Cookie=username, adorable # 测试      curl --cookie "username=adorable" localhost:9527/payment/lb
+          # - Header=X-Request-Id, \d+ # 属性必须是整数 curl --header "X-Request-Id:99" localhost:9527/payment/lb
+          # - Query=age  # curl localhost:9527/payment/lb?age=11
+          # - Host=**.adorable.cn,**.adorable.top # curl localhost:9527/payment/lb -H "host:bitqian.lovely.adorable.top"
+
 
 # gateway 入驻eureka~
 eureka:
