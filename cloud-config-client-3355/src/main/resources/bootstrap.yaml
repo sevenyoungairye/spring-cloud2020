@@ -1,0 +1,20 @@
+# spring cloud config center~ system level higher user level~
+# bit_Q_I_A_N NIU_BI_LI_TY
+
+server:
+  port: 3355
+
+spring:
+  application:
+    name: config-client
+  cloud:
+    config:
+      label: dev    # 分支名称  master
+      name: config     # 配置文件名称前缀 config-dev.yml
+      profile: dev     # 读取后缀名称   master分支config-dev.yml 会被读取
+      uri: http://localhost:3344 # 从配置中心拿
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka
