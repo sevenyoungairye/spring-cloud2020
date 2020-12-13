@@ -18,3 +18,15 @@ eureka:
   client:
     service-url:
       defaultZone: http://eureka7001.com:7001/eureka
+
+# 暴露服务端口, 修改git上的配置后, 当前服务的配置不能得到同步
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*" # all
+
+# 注意, 这么配置了还不能实现自动刷新, 需要发送post请求到当前服务， 将当前服务重新注册到eureka
+# curl -X POST "http://localhost:3355/actuator/refresh" 即可更新配置
+# 还是要发送请求的, 手动.
