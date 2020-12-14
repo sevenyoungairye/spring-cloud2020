@@ -9,10 +9,17 @@ spring:
     name: config-client
   cloud:
     config:
-      label: dev    # 分支名称  master
+      label: master    # 分支名称  master
       name: config     # 配置文件名称前缀 config-dev.yml
       profile: dev     # 读取后缀名称   master分支config-dev.yml 会被读取
       uri: http://localhost:3344 # 从配置中心拿
+
+  # rabbitmq 相关配置 15627是web管理界面的端口, 5672 是mq访问的端口
+  rabbitmq:
+    host: 47.99.161.195
+    port: 5672
+    username: guest
+    password: guest
 
 eureka:
   client:
