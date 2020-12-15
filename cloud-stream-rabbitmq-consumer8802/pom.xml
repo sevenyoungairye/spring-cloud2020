@@ -10,8 +10,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <!-- 消息消费者 -->
-    <artifactId>cloud-stream-rabbitmq-consumer8802</artifactId>
+    <!-- 解决docker安装rabbitmq management cloud -> connection refused.. https://www.cnblogs.com/jiex123/p/12832027.html -->
 
+    <artifactId>cloud-stream-rabbitmq-consumer8802</artifactId>
 
     <dependencies>
 
