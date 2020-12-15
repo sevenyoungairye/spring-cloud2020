@@ -110,4 +110,10 @@ public class PaymentController {
         return this.port;
     }
 
+    @GetMapping("/payment/zipkin")
+    public String paymentZipkin() {
+
+        return "echo lovely here... zipkin sleuth test ..";
+    }
+
 }

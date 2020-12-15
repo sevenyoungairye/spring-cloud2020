@@ -63,6 +63,13 @@
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
 
+
+        <!-- cloud 链路追踪, 一套完整的服务跟踪的解决方案 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-zipkin</artifactId>
+        </dependency>
+
     </dependencies>
 
 

@@ -6,6 +6,14 @@ server:
 spring:
   application:
     name: cloud-payment-service
+
+  # 启用链路追踪
+  zipkin:
+    base-url: http://localhost:9411
+  sleuth:
+    sampler:
+    probability: 1 # 0 - 1 越大现象越精细
+
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver

@@ -85,6 +85,15 @@
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
 
+        <!--包含了sleuth+zipkin spring cloud 链路追踪-->
+        <!--https://dl.bintray.com/openzipkin/maven/io/zipkin/java/zipkin-server-->
+        <!-- https://github.com/spring-cloud/spring-cloud-sleuth -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-zipkin</artifactId>
+        </dependency>
+
+
     </dependencies>
 
 </project>
