@@ -1,0 +1,16 @@
+# na_cos consumer client
+server:
+  port: 83
+
+spring:
+  application:
+    name: nacos-order-consumer
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+
+
+# 这里是自定义的配置微服务地址 用于controller读取 解耦
+service-url:
+  nacos-user-service: http://nacos-payment-provider
