@@ -3,4 +3,5 @@
 spring:
   profiles:
     # active: dev
-    active: test
+    # active: test
+    active: info # 测试分组
