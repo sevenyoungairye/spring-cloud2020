@@ -1,0 +1,18 @@
+# na_cos client 9002
+server:
+  port: 9002
+
+spring:
+  application:
+    name: nacos-payment-provider
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848 # na_cos server address, ip fault..
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
