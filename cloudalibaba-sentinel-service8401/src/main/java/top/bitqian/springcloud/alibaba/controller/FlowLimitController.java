@@ -38,4 +38,19 @@ public class FlowLimitController {
         return "B \t" + new Date(System.currentTimeMillis());
     }
 
+
+    @GetMapping("/test/d")
+    public String getD() {
+
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        log.info("============> come d ...");
+
+        return "D \t" + "";
+    }
+
 }
