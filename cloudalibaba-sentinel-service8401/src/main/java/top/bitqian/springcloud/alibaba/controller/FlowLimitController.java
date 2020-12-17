@@ -18,11 +18,11 @@ public class FlowLimitController {
     public String getA() {
 
         // 流控: 睡0.8s 测试线程数 1s 一个线程
-        try {
+        /*try {
             TimeUnit.MILLISECONDS.sleep(800);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
+        }*/
 
         return "A \t" + new Date(System.currentTimeMillis());
     }
