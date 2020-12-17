@@ -53,4 +53,20 @@ public class FlowLimitController {
         return "D \t" + "";
     }
 
+    @GetMapping("/test/e")
+    public String getE() {
+
+        // System.out.println(1/0); // 测试用, 注释了
+
+        return "E 测试异常比例";
+    }
+
+    @GetMapping("/test/f")
+    public String getF() {
+
+        // System.out.println(1/0); // 注释了
+
+        return "F 测试异常数, 按分钟统计";
+    }
+
 }
