@@ -1,5 +1,6 @@
 package top.bitqian.springcloud.alibaba.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,6 +13,7 @@ import java.util.concurrent.TimeUnit;
  */
 
 @RestController
+@Slf4j
 public class FlowLimitController {
 
     @GetMapping("/test/a")
@@ -29,6 +31,9 @@ public class FlowLimitController {
 
     @GetMapping("/test/b")
     public String getB() {
+
+
+        log.info("============> come b ...");
 
         return "B \t" + new Date(System.currentTimeMillis());
     }
