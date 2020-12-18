@@ -4,6 +4,7 @@ import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.alibaba.csp.sentinel.slots.block.BlockException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import top.bitqian.springcloud.alibaba.handler.MyBlockHandler;
 import top.bitqian.springcloud.entity.CommonResult;
 
 /**
@@ -36,6 +37,17 @@ public class RateLimitController {
     public CommonResult<String> testLimitByUrl() {
 
         return new CommonResult<>(200, "ok", "flow limit by url");
+    }
+
+    // 定制化全局限流
+    @GetMapping("/rate/blockHandler")
+    @SentinelResource(
+            value = "rate/blockHandler",  // 被限流的资源名称
+            blockHandlerClass = MyBlockHandler.class,  // 被限流后 处理的类
+            blockHandler = "blockExceptionHandler1")  // 处理限流类中的方法
+    public CommonResult<String> testBlockException() {
+
+        return new CommonResult<>(200, "ok", "adorable hhh");
     }
 
 }
