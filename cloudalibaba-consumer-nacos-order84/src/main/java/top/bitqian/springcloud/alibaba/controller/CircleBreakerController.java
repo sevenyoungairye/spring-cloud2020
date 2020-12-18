@@ -33,7 +33,10 @@ public class CircleBreakerController
     @GetMapping("/consumer/fallback/{id}")
     // @SentinelResource(value = "consumer/fallback", fallback = "fallbackHandler") // fallback 出现业务错误了该怎么办
     // @SentinelResource(value = "consumer/fallback", blockHandler = "blockExceptionHandler") // block 不符合sentinel控制台规则
-    @SentinelResource(value = "consumer/fallback", blockHandler = "blockExceptionHandler", fallback = "fallbackHandler") // block & java exception
+    // @SentinelResource(value = "consumer/fallback", blockHandler = "blockExceptionHandler", fallback = "fallbackHandler") // block & java exception
+    @SentinelResource(value = "consumer/fallback", blockHandler = "blockExceptionHandler",
+            fallback = "fallbackHandler",
+            exceptionsToIgnore = {NullPointerException.class}) // ignore exp will throw the ex
     public CommonResult<Payment> fallback(@PathVariable("id") Long id)
     {
 
