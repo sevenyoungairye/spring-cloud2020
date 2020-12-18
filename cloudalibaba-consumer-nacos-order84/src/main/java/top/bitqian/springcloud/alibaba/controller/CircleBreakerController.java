@@ -1,6 +1,7 @@
 package top.bitqian.springcloud.alibaba.controller;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
+import com.alibaba.csp.sentinel.slots.block.BlockException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +31,8 @@ public class CircleBreakerController
     private RestTemplate restTemplate;
 
     @GetMapping("/consumer/fallback/{id}")
-    @SentinelResource(value = "consumer/fallback", fallback = "fallbackHandler") // fallback 出现业务错误了该怎么办
+    // @SentinelResource(value = "consumer/fallback", fallback = "fallbackHandler") // fallback 出现业务错误了该怎么办
+    @SentinelResource(value = "consumer/fallback", blockHandler = "blockExceptionHandler") // block 不符合sentinel控制台规则
     public CommonResult<Payment> fallback(@PathVariable("id") Long id)
     {
 
@@ -59,6 +61,15 @@ public class CircleBreakerController
         );
     }
 
+
+    // 出现不符合sentinel控制台的规则
+    public CommonResult<Object> blockExceptionHandler(@PathVariable("id") Long id, BlockException e) {
+
+        return new CommonResult<>(
+                   444,
+                "sentinel flow limit..." +
+                         e.getMessage(), new Payment(id, null));
+    }
 
 
 }
