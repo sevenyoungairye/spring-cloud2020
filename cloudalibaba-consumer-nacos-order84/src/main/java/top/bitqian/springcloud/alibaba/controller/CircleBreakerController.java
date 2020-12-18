@@ -1,5 +1,6 @@
 package top.bitqian.springcloud.alibaba.controller;
 
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,6 +30,7 @@ public class CircleBreakerController
     private RestTemplate restTemplate;
 
     @GetMapping("/consumer/fallback/{id}")
+    @SentinelResource(value = "consumer/fallback", fallback = "fallbackHandler") // fallback 出现业务错误了该怎么办
     public CommonResult<Payment> fallback(@PathVariable("id") Long id)
     {
 
@@ -45,5 +47,18 @@ public class CircleBreakerController
 
         return new CommonResult(200, "okk", res);
     }
+
+    // 出现异常 该处理的方法
+    public CommonResult<Object> fallbackHandler(@PathVariable("id") Long id, Throwable te) {
+
+
+        return new CommonResult<>(
+                444,
+                "sth error, handler fallback --->" + te.getMessage(),
+                new Payment(id, null)
+        );
+    }
+
+
 
 }
