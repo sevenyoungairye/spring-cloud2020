@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+import top.bitqian.springcloud.alibaba.service.PaymentService;
 import top.bitqian.springcloud.entity.CommonResult;
 import top.bitqian.springcloud.entity.Payment;
 
@@ -75,5 +76,14 @@ public class CircleBreakerController
                          e.getMessage(), new Payment(id, null));
     }
 
+    @Resource
+    private PaymentService paymentService;
+
+    // openFeign 远程调用
+    @GetMapping("/consumer/payment/get/{id}")
+    public CommonResult<Payment> getPaymentById(@PathVariable("id") Long id) {
+
+        return paymentService.getPaymentById(id);
+    }
 
 }
