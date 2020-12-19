@@ -28,6 +28,7 @@
         </dependency>
 
         <!-- sentinel-datasource-nacos -->
+        <!-- 用来持久化sentinel的配置到nacos -->
         <dependency>
             <groupId>com.alibaba.csp</groupId>
             <artifactId>sentinel-datasource-nacos</artifactId>

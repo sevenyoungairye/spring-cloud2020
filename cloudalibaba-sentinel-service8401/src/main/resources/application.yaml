@@ -13,6 +13,30 @@ spring:
         dashboard: localhost:8080 # sentinel
         port: 8719  #默认8719，假如被占用了会自动从8719开始依次+1扫描。直至找到未被占用的端口
 
+      # sentinel的数据源, 将sentinel的配置持久化到nacos
+      datasource:
+        ds1:
+          nacos:
+            server-addr: localhost:8848
+            dataid: cloudalibaba-sentinel-service
+            groupid: DEFAULT_GROUP
+            data-type: json
+            rule-type: flow # 限流
+
+
+############### nacos控制台 json配置 ---> 将图形化的sentinel配置搬到了nacos
+#  [
+#  {
+#    "resource": "/byUrl",  # 资源名称
+#    "limitApp": "default",    #来源应用
+#    "grade":   1,             # 阈值类型 0线程数 1表示QPS
+#    "count":   1,             # count 单机阈值
+#    "strategy": 0,            # 流控模式 0 直接 1 关联 2 链路
+#    "controlBehavior": 0,     # 流控效果 1 快速失败 2 warm up 3 排队等待
+#    "clusterMode": false      # 是否集群
+#  }
+#  ]
+
 # web 图形化界面展示
 management:
   endpoints:
