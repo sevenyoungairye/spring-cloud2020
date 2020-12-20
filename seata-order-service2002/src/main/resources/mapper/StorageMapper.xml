@@ -16,7 +16,7 @@
     <!-- @param 代替了参数, 已用库存增加, 剩余库存减少 -->
     <update id="decreaseStorage">
 
-        update set used = used + #{count}, residue = residue - #{count}
+        update t_storage set used = used + #{count}, residue = residue - #{count}
         where product_id = #{productId}
 
     </update>

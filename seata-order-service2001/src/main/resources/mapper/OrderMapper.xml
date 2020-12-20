@@ -16,7 +16,7 @@
     </resultMap>
 
     <insert id="create" parameterType="top.bitqian.springcloud.alibaba.domain.Order">
-        insert into seata_order.t_order
+        insert into t_order
             (id, user_id, product_id, count, money, status)
             values
             (null, #{userId}, #{productId}, #{count}, #{money}, 0);
@@ -25,7 +25,7 @@
     <!-- 将订单状态改为1 -->
     <update id="update" parameterType="top.bitqian.springcloud.alibaba.domain.Order">
 
-        update seata_order.t_order set status = 1 where user_id = #{userId} and status = #{status};
+        update t_order set status = 1 where user_id = #{userId} and status = #{status};
 
     </update>
 

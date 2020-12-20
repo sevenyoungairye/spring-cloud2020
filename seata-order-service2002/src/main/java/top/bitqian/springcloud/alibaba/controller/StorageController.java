@@ -16,6 +16,9 @@ import javax.annotation.Resource;
 @RestController
 public class StorageController {
 
+    // 测试http://localhost:2001/order/create?userId=1&productId=1&count=10&money=100
+    // 下单成功。
+
     @Resource
     private StorageService storageService;
 
