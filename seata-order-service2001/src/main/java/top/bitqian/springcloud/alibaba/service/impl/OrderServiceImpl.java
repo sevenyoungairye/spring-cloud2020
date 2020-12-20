@@ -1,5 +1,6 @@
 package top.bitqian.springcloud.alibaba.service.impl;
 
+import io.seata.spring.annotation.GlobalTransactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import top.bitqian.springcloud.alibaba.dao.OrderDao;
@@ -29,6 +30,7 @@ public class OrderServiceImpl implements OrderService {
     private AccountService accountService;
 
     // 订单创建的流程: 订单生成---> 调用库存服务扣减库存 ---> 调用账户服务扣减账户余额 ---> 修改订单状态
+    @GlobalTransactional(name = "seata-create-order", rollbackFor = Exception.class) // 对异常进行全局事务控制
     @Override
     public void create(Order order) {
 
